@@ -1,0 +1,697 @@
+<html 5>
+<head>
+	<meta charset="UTF-8">
+	<link rel='stylesheet' id='animated-css' type='text/css' media='all' />
+	<link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
+	<script type = "text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<link rel='shortcut icon' href='about:blank' type='image/x-icon'/ >
+	
+<style>
+
+::selection { background-color: #87CEFA; }
+
+html
+{
+	font-family:'Muli',sans-serif;
+	overflow-x: hidden;
+	color: #0d091b;
+}
+body{
+	margin: 0;	
+	width:100vw;
+	height:100%
+}
+
+h1{
+	font-size:3em;
+}
+
+h3{
+	font-size: 2em;
+}
+
+#canvas{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/*parallax*/
+
+.base{
+	/*color stars image*/
+	background-size: contain;
+	transform: translateZ(-1px) scale(2);
+}
+
+.back{
+	background-image: url("http://cdn.wallpapersafari.com/35/48/nD6W8T.jpg");
+	transform: translateZ(-5px) scale(6);
+	
+}
+
+#parallax{
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-color: #0d091b;
+	background-position: center;
+
+
+	position: absolute;
+	perspective:1px;
+	width: 100vw;
+	height:100vh;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+.parallax-group {
+	position: relative;
+	transform-style: preserve-3d;
+	height: 100vh;
+}
+
+.layer{
+	position:absolute;
+	top: 0;
+	right:0;
+	bottom:0;
+	left:0
+}
+
+/*scrollbar stuff*/
+::-webkit-scrollbar{
+	width: 1em;
+}
+
+::-webkit-scrollbar-track {
+}
+
+#parallax::-webkit-scrollbar-thumb {
+	background-color: #af9fdf;
+	border-radius: 2px;
+}
+
+/*elevator sidebar*/
+
+.sideNav {
+	position: relative;
+	margin-left: 20px
+	border: solid 1px blue;
+}
+
+.progressBar {
+	position: absolute;
+	top: 10%;
+	left: -5px;
+	height: 4px;
+	width: 35px;
+	background: #af9fdf;
+	border-radius: 1px;
+	z-index: 5;
+}
+
+.elevator{
+	position: absolute;
+	left: 0px;
+	top: 5%;
+	height: 90%;
+	width: 8px;
+	background: linear-gradient(#6040bf, #281B50);
+	border-radius: 2px;
+	z-index: 4;
+}
+
+.sidebar-container {
+	display: flex;
+	flex-direction: column;
+	top: -20px;    
+	font-size: 1.2rem;
+	font-weight: 600;
+	letter-spacing: 1px;
+	line-height: 3em;	
+	padding-left: 35px;
+}
+
+.sidebar-container a:hover {
+	background-color: #af9fdf;
+
+}
+
+.hovered{
+	text-shadow: 3px 3px #af9fdf;
+}
+
+aside,
+header {
+	height: 100vh
+}
+
+aside a {
+	transition: all 1s ease;
+	color: black;
+	text-decoration: none;
+	font-size: 30px;    
+}
+
+aside {
+	width: 20%;
+	top: 0;
+	position: fixed;
+	z-index: 10;
+	display: none;
+}
+
+aside .innerNav {
+	background-color: rgba(255, 255, 255, 0.98);
+	position: relative;
+	top: 50%;
+	transform: translate(0, -50%);
+	border-radius: 4px;
+	box-shadow: 2px 0px 6px rgba(0,0,0,0.2);
+}
+
+.index{
+	color:#d6cdee;
+	font-size: 30px;
+	opacity: 0.8;
+	position: relative;
+	left: -25;
+}
+
+/*right side*/
+
+.home{
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.project-main{
+	background-color: rgba(10, 0, 10, 0.75);
+	background-image: url("http://cdn.wallpapersafari.com/35/48/nD6W8T.jpg");
+	width: 100%;
+	float: right;
+}
+
+.contact-main{
+	width: 100%;
+	float: right;
+}
+
+.main{
+	box-shadow: 2px 0px 6px 2px rgba(0,0,0,0.2);
+	background-color: #f5f4fb;
+	width: 100%;
+	float: right;
+}
+
+.portrait-container, section{
+	float: right;
+	width: 70%;
+	margin-right: 5%;
+}
+
+#projects h2{
+	color: #f5f4fb;
+	font-size: 40px;
+	text-align: center;
+	padding: 10px;
+}
+
+#about h2,  #skills h2, #contact h2{
+	
+	color: #d6cdee;
+	font-size: 40px;
+	text-align: center;
+	padding: 10px;
+}
+
+#about, #projects, #skills, #contact{
+	font-size: 18px;
+}
+
+.container{
+	margin-bottom: 30px;
+}
+
+.contact-container{
+}
+
+.about-text, .skill-icon-container, .contact-text{
+	width: 80%;
+	margin: auto;
+
+}
+
+/*about*/
+
+.portrait-container{
+	text-align: center;	
+}
+
+#about{
+
+	text-align: center;
+}
+
+#about img{
+	border-radius: 15%;
+	border: solid 6px #d6cdee;
+}
+
+
+/*projects*/
+
+	/*project index*/
+
+.projects-container{
+	margin-bottom: 250px;
+}
+
+#project-index-row{
+	display:flex;
+	flex-direction: row;
+	max-width: 700px;
+	height: 100px;
+	width: 90%;
+	margin: auto;
+}
+
+.project-index-icon{
+	border-left: solid 5px #f5f4fb;	
+	border-top: solid 5px #f5f4fb;
+}
+
+.project-index-icon img:hover{
+	-webkit-filter: grayscale(0%);
+	filter: grayscale(0%);
+	margin-top: 10px;
+}
+
+.project-index-icon img{
+	-webkit-transition: -webkit-filter 500ms, filter 500ms, margin-top 800ms;
+	transition: -webkit-filter 500ms, filter 500ms, margin-top 800ms;
+	-webkit-filter: grayscale(50%);
+	filter: grayscale(50%);
+}
+
+	/*project display*/
+
+.project-row{
+	margin-top: 50px;
+	width: 100%;
+	display:flex;
+	flex-direction: row;
+	height: 400px;
+}
+
+#leftarrow, #rightarrow{
+	flex-grow: 1;
+	text-align: center;
+	border: none;
+	height: 100%;
+	color: #0d091b;	
+	margin: 0 auto;
+	box-shadow: none;
+	background: none;
+}
+
+#leftarrow:focus, #rightarrow:focus{
+	box-shadow:none;
+	outline: 0;
+	background: none;
+}
+
+		/*project display center*/
+
+#project-container{
+	flex-grow: 5;
+	text-align: center;
+	flex-direction: column;
+}
+
+#project-image{
+	background-color: black;
+	border: solid 10px #6040bf;
+	border-radius: 2px 2px 0 0;
+	box-shadow: 2px 0px 6px rgba(0,0,0,0.2);
+}
+
+#project-image img{
+	width: auto;
+	height: 450px;
+	margin: auto;
+}
+
+#project-text{
+	color: #0d091b;
+	font-size: 40px;
+	padding: 14px;
+	font-weight: 700;
+	height: 50px;
+	background-color: #f5f4fb;
+	-webkit-transition: background-color 800ms;
+	transition: background-color 800ms;
+	border-radius: 0 0 2px 2px;
+	box-shadow: 2px 0px 6px rgba(0,0,0,0.2);
+}
+
+#project-image:hover + #project-text{
+	background-color: #d6cdee;
+}
+
+/*skills*/
+#skills h2{
+	color: #6040bf
+}
+
+.skill-container{
+
+}
+
+.skill-icon-container{
+	display:flex;
+	flex-direction: row;	
+	border: solid 3px #d6cdee;
+}
+
+#good{
+	border-right:solid 3px #d6cdee;
+}
+
+#learn{
+	border-left:solid 3px #d6cdee;
+}
+
+.skill{
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex: 1;
+	padding-bottom: 30px;
+}
+
+.skill i{
+	color: #d6cdee;
+	font-size: 50px;
+	margin-left: 20px;
+	margin-top: 30px;
+}
+
+.skill-description{	
+	font-weight: 700;
+	padding-top: 20px;
+	text-align: center;
+	font-size: 20px;
+	width: 100%;
+}
+
+/*contact*/
+
+.contact-container{
+	margin-top: 30px;
+}
+
+#contact-me{
+    background-color: black;
+	font-weight: 700;
+	font-size: 2em;
+	color: white;
+	text-align: center;
+}
+
+.contact-text{
+	text-align: left;
+}
+
+.contact-text a{
+	text-decoration: none;
+	color: white;
+	text-align: center;
+}
+
+
+/*footer*/
+
+#footer{
+	background-color: black;
+	height: 5%;
+	padding: 30px;
+	font-size: 10px;
+	color: #f5f4fb;
+	width: 100%;
+}
+
+</style>
+
+</head>
+<body>
+	<div id = "parallax">
+		<header>
+			<div class="parallax-group home"><a name ="home">
+				<canvas id = "canvas">WELCOME</canvas>
+
+				<!-- <div class="layer base"></div> -->
+				<div class="layer back"></div>
+
+			</div>
+		</header>
+		<div class = "parallax-group">
+			<div class="main">
+				<div class="portrait-container">
+
+					<h1><!-- Vivian Lo --></h1>
+
+					
+				</div>
+				<section id='2' class="about-container container" ><a name ="about">
+
+					<div id="about" class="about-content">
+						<p>
+							I am a passionate computer programmer with 5 years of coding experience both in major computer languages such as Python, Java, C++, and C, as well as in web development. I am a fast learner, a good team player, and a hard-working natural coder. I enjoy solving challenging problems and working in a collaborative team environment, and I work well under pressure.
+						</p>
+					</div>
+
+			</section> 
+			
+		</div>
+		<div class = "project-main">
+			<section id='3' class="projects-container container">
+
+				<div id = "projects" class="projects-content"><a name ="projects">
+					<h2>Projects</h2>
+
+					<div id = "project-index-row"></div>
+					<div class = "project-row">
+						<button id = "leftarrow"><img src = "http://i.imgur.com/mGUle5X.png"></button>
+
+						<div id = "project-container">
+							<div id = "project-image">
+								<a href = "https://tetrisme.herokuapp.com" target = "_blank">
+									<img src = "https://66.media.tumblr.com/f115a7ef593e0c8efa2a492eb1a646c3/tumblr_ogsv30cybU1r0n0m2o1_540.png" height = "500" width = "700">
+								</a>
+							</div>
+							<div id = "project-text">Tetris Me</div>
+						</div>
+
+						<button id = "rightarrow"><img src = "http://i.imgur.com/ehiyDJ2.png"></button>
+					</div>
+
+				</div>
+
+			</section>
+		</div>
+		<div class = "main">
+			<section id='4' class="skill-container container"><a name ="skills">
+
+				<div id = "skills" class="skill-content">
+					<h2>Skill Set</h2>
+
+					<div class = "skill-icon-container">
+						<div id = "good" class = "skill">
+							<div class = "skill-description"></div>
+							<i class="devicon-github-plain"></i><i class="devicon-d3js-plain"></i><i class="devicon-bootstrap-plain"></i><i class="devicon-django-plain"></i><i class="devicon-illustrator-plain"></i><i class="devicon-heroku-original"></i><i class="devicon-linux-plain"></i><i class="devicon-nodejs-plain"></i><i class="devicon-redis-plain"></i>
+						</div>
+
+						<div id = "great" class = "skill">
+							<div class = "skill-description"></div>
+							<i class="devicon-mysql-plain"></i><i class="devicon-html5-plain"></i><i class="devicon-python-plain"></i><i class="devicon-c-plain"></i><i class="devicon-css3-plain"></i><i class="devicon-javascript-plain"></i><i class="devicon-jquery-plain"></i>
+						</div>
+						<div id = "learn" class = "skill">
+							<div class = "skill-description"></div>
+							<i class="devicon-angularjs-plain"></i><i class="devicon-mongodb-plain"></i><i class="devicon-react-original"></i><i class="devicon-sass-original"></i><i class="devicon-rails-plain"></i>
+						</div>
+					</div>
+
+				</div>
+
+			</section>
+
+		</div>
+		<div class="contact-main">
+			<section id='5' class="contact-container container"><a name ="contact">
+				<div id = "contact" class="contact-content">
+					<div id="contact-me">Contact me!</div>
+
+					<div class = "contact-text">
+						Email:
+
+						<p><a href="mailto:vivianlo789@gmail.com" target="_top">vivianlo789@gmail.com</a></p>
+
+					</div>
+				</div>
+			</section>
+		</div>
+		<footer>
+			<div id = "footer">© Vivian Lo 2016</div>
+		</footer>
+	</div>
+
+</div>
+<!-- /.main -->
+<aside>
+	<div class="innerNav">
+		<nav class="sideNav">
+
+			<div class ="elevator"></div>
+			<div class="progressBar"></div>
+			<div class = "sidebar-container">
+				<div id = "nav-home" class = "navtab"><a href = "#home"><span class = "index"> ➤</span>HOME</a></div>
+				<div id = "nav-about" class = "navtab"><a href = "#about"><span class = "index"> ➤</span>ABOUT</a></div>
+				<div id = "nav-projects" class = "navtab"><a href = "#projects"><span class = "index"> ➤</span>PROJECTS</a></div>
+				<div id = "nav-skills" class = "navtab"><a href = "#skills"><span class = "index"> ➤</span>SKILLS</a></div>
+				<div id = "nav-contact" class = "navtab"><a href = "#contact"><span class = "index"> ➤</span>CONTACT</a></div>
+			</div>    
+		</nav>
+	</div>
+</aside>
+
+<script type='text/javascript'>
+
+$(document).ready(init);
+var index = 0;
+var footerPosition;
+var aboutPosition;
+var projectsPosition;
+var skillsPosition;
+var contactPosition;
+
+function init(){
+	$("#parallax").scroll(elevatortabs);
+	bottomPosition = $('#footer')[0].scrollHeight + $('#footer').height();
+	footerPosition = $("#footer").offset().top;
+	aboutPosition = $("#about").offset().top;
+	projectsPosition = $("#projects").offset().top;
+	skillsPosition = $("#skills").offset().top;
+	contactPosition = $("#contact").offset().top;
+	$("#leftarrow").on("click", leftarrow);
+	$("#rightarrow").on("click", rightarrow);
+	index = 0;
+	var i = 0;
+	projectimage.forEach(function(image){
+		$("#project-index-row").append("<div class = 'project-index-icon' id = 'project" + i +"'><img src =" + image + " height = '125' width = '185' ></div>");
+		eval('var func = function(){switchProjectViewTo(' + i + ');};');
+		$("#project"+i).on("click", func);
+		i++;
+	})
+	initdraw();
+	console.log('init')
+}
+
+var finalNameText = "> Vivian Lo";
+var finalDescript = "Developer";
+var currentTextIndex = 0;
+
+function initdraw(){
+	var c = document.getElementById("canvas");
+	var ctx = c.getContext("2d");
+	ctx.canvas.width  = window.innerWidth;
+ 	ctx.canvas.height = window.innerHeight;
+	ctx.font = "100px Arial";
+	ctx.fillStyle = "#f5f4fb";
+	ctx.strokeStyle = "#f5f4fb";
+	calldraw();
+}
+
+function calldraw(){
+	window.requestAnimationFrame(draw);
+}
+
+function draw(){
+	var c = document.getElementById("canvas");
+	var ctx = c.getContext("2d");
+	currentTextIndex ++;
+	if(currentTextIndex <= finalNameText.length){
+		var currentText = finalNameText.slice(0, currentTextIndex);
+		ctx.strokeText(currentText, canvas.width/2, canvas.height/2);
+		setTimeout(calldraw, 100);
+	}else if(currentTextIndex <= finalNameText.length + finalDescript.length){
+		var currentText = finalDescript.slice(0, currentTextIndex - finalNameText.length);
+		ctx.font = "50px Arial";
+		ctx.fillText(currentText, canvas.width/2+ 100, canvas.height/2 + 70);
+
+		setTimeout(calldraw, 50);
+	}
+}
+
+
+function switchProjectViewTo(projectNumber){
+	$("#project-image").hide().html(getNewProjectHTML(projectlink[projectNumber], projectimage[projectNumber])).fadeIn();
+	$("#project-text").hide().html(projecttext[projectNumber]).fadeIn();
+}
+
+var projectimage = ["https://66.media.tumblr.com/f115a7ef593e0c8efa2a492eb1a646c3/tumblr_ogsv30cybU1r0n0m2o1_540.png", "http://67.media.tumblr.com/b2345b8d2217311d252a4fdfeb13d98b/tumblr_ogxawyKbYg1r0n0m2o1_1280.png", "http://66.media.tumblr.com/64f18088d63cbe25f55a0c0db90610a4/tumblr_ogxajyhkRu1r0n0m2o1_1280.png"
+];
+var projecttext = ["Tetris Me", "League Statistics", "Taboo Online"];
+var projectlink = ["https://tetrisme.herokuapp.com", "http://vivian789.github.io/Fantasy/", "https://vivian789.github.io/TabooOnline/"];
+
+function getNewProjectHTML(link, image){
+	return "<a href = " + link + " target = '_blank'><img src = " + image + " height = '500' width = '700'></a>";
+}
+
+function leftarrow(){
+	index -= 1;
+	if (index < 0){
+		index  = projectimage.length -1;
+	}
+	switchProjectViewTo(index);
+}
+
+function rightarrow(){
+	index +=1;
+	if (index > projectimage.length -1){
+		index  = 0;
+	}
+	switchProjectViewTo(index);
+}
+
+function elevatortabs(){
+	var homePosition = 0;
+	var currentPosition = $("#parallax").scrollTop();
+	var scrollPercentage = (currentPosition/bottomPosition) * 100;
+	$(".progressBar").css("top", (scrollPercentage) + "%");
+	if(scrollPercentage < 10){
+		$("aside").fadeOut();
+	}else{
+		$("aside").fadeIn();
+	}
+	$("#nav-home").removeClass("hovered");
+	$("#nav-about").removeClass("hovered");
+	$("#nav-projects").removeClass("hovered");
+	$("#nav-skills").removeClass("hovered");
+	$("#nav-contact").removeClass("hovered");
+	if(currentPosition + (contactPosition/10) <= aboutPosition){
+		$("#nav-home").addClass("hovered");
+	}else if(currentPosition + (contactPosition/10)<= projectsPosition){
+		$("#nav-about").addClass("hovered");
+	}else if(currentPosition +(contactPosition/10)<= skillsPosition){
+		$("#nav-projects").addClass("hovered");
+	}else if(currentPosition + (contactPosition/10)<= contactPosition){
+		$("#nav-skills").addClass("hovered");
+	}else{
+		$("#nav-contact").addClass("hovered");			
+	}
+}
+</script>	
+</body>
+</html>
